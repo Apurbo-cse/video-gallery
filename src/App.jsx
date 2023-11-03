@@ -33,12 +33,14 @@ const App = () => {
     setLayout(updatedLayout);
   };
 
+  const areAnyImagesSelected = layout.some((item) => item.checked);
+  
   return (
     <div className="p-5">
 
       <div className=" container mx-auto" style={{ width: "800px" }}>
         <div className="d-flex justify-content-between w-100">
-          <div>Selected Items </div>  <button onClick={handleDelete}>Delete</button>
+          <div>Selected Items </div>   {areAnyImagesSelected && <button onClick={handleDelete}>Delete</button>}
         </div>
 
         <div className="d-flex flex-wrap border">
