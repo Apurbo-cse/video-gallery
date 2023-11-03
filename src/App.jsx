@@ -1,96 +1,77 @@
-import React, { useState } from "react";
-import GridLayout from "react-grid-layout";
-import "react-grid-layout/css/styles.css";
-import "react-resizable/css/styles.css";
+import React, { Component } from "react";
+// import GridLayout from 'react-grid-layout';
+// import { Responsive as ResponsiveGridLayout } from 'react-grid-layout';
+import { Responsive, WidthProvider } from "react-grid-layout";
+import DemoComponent from "./DemoComponent";
+// eslint-disable-next-line react-refresh/only-export-components
+const ResponsiveGridLayout = WidthProvider(Responsive);
+export default class App extends Component {
+  constructor() {
+    super();
+    this.state = {
+      value: true,
+    };
+    this.onHandle = this.onHandle.bind(this);
+  }
+  onHandle() {
+    this.setState((prevState) => ({
+      value: !prevState.value,
+    }));
+  }
+  render() {
+    var layout = [
+      { i: "a", x: 0, y: 0, w: 4, h: 1 },
+      { i: "b", x: 4, y: 0, w: 4, h: 1 },
+      { i: "c", x: 8, y: 0, w: 4, h: 1 },
+      { i: "d", x: 0, y: 1, w: 4, h: 1 },
+      { i: "e", x: 4, y: 1, w: 4, h: 1 },
+      { i: "f", x: 8, y: 1, w: 4, h: 1 },
+    ];
+    var layout1 = [
+      { i: "a", x: 0, y: 0, w: 6, h: 1 },
+      { i: "b", x: 6, y: 0, w: 6, h: 1 },
+      { i: "c", x: 0, y: 1, w: 6, h: 1 },
+      { i: "d", x: 6, y: 1, w: 6, h: 1 },
+      { i: "e", x: 0, y: 2, w: 6, h: 1 },
+      { i: "f", x: 6, y: 2, w: 6, h: 1 },
+    ];
 
-const App = () => {
-  const generateLayout = () => {
-    const layout = [];
-    const cols = 5;
-    const rows = 3;
+    var layout = { lg: this.state.value === true ? layout : layout1 };
 
-    for (let y = 0; y < rows; y++) {
-      for (let x = 0; x < cols; x++) {
-        const i = (y * cols) + x + 1;
-        layout.push({ i: i.toString(), x, y, w: 2, h: 2, checked: false });
-      }
-    }
-
-    return layout;
-  };
-
-  const [layout, setLayout] = useState(generateLayout());
-
-  const handleCheck = (itemId) => {
-    const updatedLayout = layout.map((item) =>
-      item.i === itemId ? { ...item, checked: !item.checked } : item
-    );
-    setLayout(updatedLayout);
-  };
-
-  const handleDelete = () => {
-    const updatedLayout = layout.filter((item) => !item.checked);
-    setLayout(updatedLayout);
-  };
-
-  const areAnyImagesSelected = layout.some((item) => item.checked);
-  
-  return (
-    <div className="p-5">
-
-      <div className=" container mx-auto" style={{ width: "800px" }}>
-        <div className="d-flex justify-content-between w-100">
-          <div>Selected Items </div>   {areAnyImagesSelected && <button onClick={handleDelete}>Delete</button>}
-        </div>
-
-        <table className="table border">
-          <tr>
-              <td colSpan={2}  rowSpan={2}>  <img src={`https://via.placeholder.com/600/92c952`} className="p-2" style={{ width: "300px" }} alt="" /></td>
-              <td >  <img src={`https://via.placeholder.com/600/92c952`} className="p-2" style={{ width: "150px" }} alt="" /></td>
-              <td >  <img src={`https://via.placeholder.com/600/92c952`} className="p-2" style={{ width: "150px" }} alt="" /></td>
-             <td >  <img src={`https://via.placeholder.com/600/92c952`} className="p-2" style={{ width: "150px" }} alt="" /></td>
-          </tr>
-          <tr>
-              <td >  <img src={`https://via.placeholder.com/600/92c952`} className="p-2" style={{ width: "150px" }} alt="" /></td>
-              <td >  <img src={`https://via.placeholder.com/600/92c952`} className="p-2" style={{ width: "150px" }} alt="" /></td>
-             <td >  <img src={`https://via.placeholder.com/600/92c952`} className="p-2" style={{ width: "150px" }} alt="" /></td>
-          </tr>
-          <tr>
-              <td >  <img src={`https://via.placeholder.com/600/92c952`} className="p-2" style={{ width: "150px" }} alt="" /></td>
-              <td >  <img src={`https://via.placeholder.com/600/92c952`} className="p-2" style={{ width: "150px" }} alt="" /></td>
-              <td >  <img src={`https://via.placeholder.com/600/92c952`} className="p-2" style={{ width: "150px" }} alt="" /></td>
-              <td >  <img src={`https://via.placeholder.com/600/92c952`} className="p-2" style={{ width: "150px" }} alt="" /></td>
-             <td >  <img src={`https://via.placeholder.com/600/92c952`} className="p-2" style={{ width: "150px" }} alt="" /></td>
-          </tr>
-        </table>
-
-        <div className="d-flex flex-wrap border">
-          <GridLayout className="layout" layout={layout} cols={5} rowHeight={50} width={800}>
-            {layout.map((item) => (
-              <div className="mb-2 positin-relative" key={item.i}>
-                <label htmlFor={item.i}>
-                  <img src={`https://via.placeholder.com/600/92c952`} className="p-2" style={{ width: "150px" }} alt="" />
-                </label>
-                <input
-                  id={item.i}
-                  type="checkbox"
-                  checked={item.checked}
-                  onChange={() => handleCheck(item.i)}
-                  style={
-                    {
-                      position: 'absolute',
-                      top: 10,
-                      left: 10
-                    }
-                  }
-                />
-              </div>
-            ))}
-          </GridLayout>
-        </div>
+    return (
+      <div className="container mx-auto">
+        <button style={{ marginLeft: "45%" }} onClick={this.onHandle}>
+          {this.state.value === true ? "Increase" : "Decrease"} Grid by 2
+          columns
+        </button>
+        <ResponsiveGridLayout
+          className="layout"
+          layouts={layout}
+          breakpoints={{ lg: 1200 }}
+          cols={{ lg: 12 }}
+          rowHeight={281}
+          width={1200}
+        >
+          <div key="a" style={{ backgroundColor: "yellow" }}>
+            <DemoComponent color={"yellow"} />
+          </div>
+          <div key="b" style={{ backgroundColor: "green" }}>
+            <DemoComponent color={"green"} />
+          </div>
+          <div key="c" style={{ backgroundColor: "red" }}>
+            <DemoComponent color={"red"} />
+          </div>
+          <div key="d" style={{ backgroundColor: "blue" }}>
+            <DemoComponent color={"blue"} />
+          </div>
+          <div key="e" style={{ backgroundColor: "violet" }}>
+            <DemoComponent color={"violet"} />
+          </div>
+         <div key="f" style={{ backgroundColor: "lemonchiffon" }}>
+            <DemoComponent color={"lemonchiffon"} />
+          </div>
+        </ResponsiveGridLayout>
       </div>
-    </div>
-  );
-};
-
-export default App;
+    );
+  }
+}
