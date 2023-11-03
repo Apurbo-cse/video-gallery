@@ -43,6 +43,27 @@ const App = () => {
           <div>Selected Items </div>   {areAnyImagesSelected && <button onClick={handleDelete}>Delete</button>}
         </div>
 
+        <table className="table border">
+          <tr>
+              <td colSpan={2}  rowSpan={2}>  <img src={`https://via.placeholder.com/600/92c952`} className="p-2" style={{ width: "300px" }} alt="" /></td>
+              <td >  <img src={`https://via.placeholder.com/600/92c952`} className="p-2" style={{ width: "150px" }} alt="" /></td>
+              <td >  <img src={`https://via.placeholder.com/600/92c952`} className="p-2" style={{ width: "150px" }} alt="" /></td>
+             <td >  <img src={`https://via.placeholder.com/600/92c952`} className="p-2" style={{ width: "150px" }} alt="" /></td>
+          </tr>
+          <tr>
+              <td >  <img src={`https://via.placeholder.com/600/92c952`} className="p-2" style={{ width: "150px" }} alt="" /></td>
+              <td >  <img src={`https://via.placeholder.com/600/92c952`} className="p-2" style={{ width: "150px" }} alt="" /></td>
+             <td >  <img src={`https://via.placeholder.com/600/92c952`} className="p-2" style={{ width: "150px" }} alt="" /></td>
+          </tr>
+          <tr>
+              <td >  <img src={`https://via.placeholder.com/600/92c952`} className="p-2" style={{ width: "150px" }} alt="" /></td>
+              <td >  <img src={`https://via.placeholder.com/600/92c952`} className="p-2" style={{ width: "150px" }} alt="" /></td>
+              <td >  <img src={`https://via.placeholder.com/600/92c952`} className="p-2" style={{ width: "150px" }} alt="" /></td>
+              <td >  <img src={`https://via.placeholder.com/600/92c952`} className="p-2" style={{ width: "150px" }} alt="" /></td>
+             <td >  <img src={`https://via.placeholder.com/600/92c952`} className="p-2" style={{ width: "150px" }} alt="" /></td>
+          </tr>
+        </table>
+
         <div className="d-flex flex-wrap border">
           <GridLayout className="layout" layout={layout} cols={5} rowHeight={50} width={800}>
             {layout.map((item) => (
